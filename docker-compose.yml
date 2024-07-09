@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  kaotonamae_back:
+    container_name: kaotonamae_back
+    depends_on:
+      - kaotonamae_db
+    volumes:
+      - ./:/project
+    tty: true
+    build:
+      context: .
+      dockerfile: back.dockerfile
+    ports:
+      - 8080:8080
+    command: sh -c 'air'
+
+  kaotonamae_db:
+    container_name: kaotonamae_db
+    build:
+      context: .
+      dockerfile: db.dockerfile
+    volumes:
+      - mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - 3306:3306
+    tty: true
+
+volumes:
+  mysql_data:
