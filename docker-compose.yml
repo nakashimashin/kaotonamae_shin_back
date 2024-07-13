@@ -14,12 +14,16 @@ services:
     ports:
       - 8080:8080
     command: sh -c 'air'
+    env_file:
+      - .env
 
   kaotonamae_db:
     container_name: kaotonamae_db
     build:
       context: .
       dockerfile: db.dockerfile
+    env_file:
+      - .env
     volumes:
       - mysql_data:/var/lib/mysql
     environment:
