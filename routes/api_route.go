@@ -14,6 +14,7 @@ func GetApiRouter() *gin.Engine {
 		auth := v1.Group("/auth")
 		{
 			auth.GET("/", controllers.GetAuths)
+			auth.POST("/", controllers.RegisterAuth)
 		}
 	}
 

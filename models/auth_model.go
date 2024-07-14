@@ -17,3 +17,13 @@ func GetAllAuths() (auths []Auth, err error) {
 
 	return
 }
+
+func RegisterAuth(auth Auth) (err error) {
+	err = DB.Debug().Create(&auth).Error
+
+	if err != nil {
+		return err
+	}
+
+	return
+}
