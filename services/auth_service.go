@@ -2,6 +2,7 @@ package services
 
 import (
 	"fmt"
+	"golang.org/x/crypto/bcrypt"
 	"kaotonamae_back/models"
 
 )
@@ -25,14 +26,26 @@ func GetAuths() ([]string, error) {
 }
 
 func RegisterAuth(request AuthRequest) (auth models.Auth, err error) {
+	hash, err := HashPassword(request.Password)
+	if err != nil {
+		return auth, fmt.Errorf("予期せぬエラーが発生しました: %v", err)
+	}
 	auth = models.Auth{
 		UserId: request.UserId,
 		Email: request.Email,
-		Password: request.Password,
+		Password: hash,
 	}
 	err = models.RegisterAuth(auth)
 	if err != nil {
 		return auth, fmt.Errorf("予期せぬエラーが発生しました: %v", err)
 	}
 	return auth, nil
+}
+
+func HashPassword(password string) (string, error) {
+	hash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	if err != nil {
+		return "", fmt.Errorf("パスワードのハッシュ化に失敗しました: %v", err)
+	}
+	return string(hash), nil
 }
