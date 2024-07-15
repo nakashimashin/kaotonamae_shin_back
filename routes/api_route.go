@@ -31,6 +31,13 @@ func GetApiRouter() *gin.Engine {
 			userInfo.GET("/:user_id", controllers.GetUserInfoById)
 			userInfo.POST("/", controllers.RegisterUserInfo)
 		}
+
+		group := v1.Group("/group")
+		{
+			group.GET("/", controllers.GetGroups)
+			group.GET("/:group_id", controllers.GetGroupById)
+			group.POST("/", controllers.RegisterGroup)
+		}
 	}
 
 	return r
