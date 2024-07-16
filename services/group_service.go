@@ -3,6 +3,8 @@ package services
 import (
 	"fmt"
 	"kaotonamae_back/models"
+
+	"github.com/google/uuid"
 )
 
 type GroupRequest struct {
@@ -31,7 +33,7 @@ func GetGroupById(groupId string) (models.Group, error) {
 
 func RegisterGroup(request GroupRequest) (models.Group, error) {
 	group := models.Group{
-		GroupId: request.GroupId,
+		GroupId: uuid.New().String(),
 		UserId: request.UserId,
 		GroupName: request.GroupName,
 		GroupDescription: request.GroupDescription,
