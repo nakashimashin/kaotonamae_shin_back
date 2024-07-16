@@ -31,6 +31,14 @@ func GetGroupById(groupId string) (models.Group, error) {
 	return data, nil
 }
 
+func GetGroupByUserId(userId string) ([]models.Group, error) {
+	datas, err := models.GetGroupByUserId(userId)
+	if err != nil {
+		return nil, fmt.Errorf("予期せぬエラーが発生しました: %v", err)
+	}
+	return datas, nil
+}
+
 func RegisterGroup(request GroupRequest) (models.Group, error) {
 	group := models.Group{
 		GroupId: uuid.New().String(),

@@ -26,6 +26,12 @@ func GetGroupById(groupId string) (group Group, err error) {
 	return
 }
 
+func GetGroupByUserId(userId string) (groups []Group, err error) {
+	err = DB.Debug().Where("user_id = ?", userId).Find(&groups).Error
+
+	return
+}
+
 func RegisterGroup(group Group) (err error) {
 	err = DB.Debug().Create(&group).Error
 
