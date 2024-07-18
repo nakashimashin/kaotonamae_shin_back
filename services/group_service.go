@@ -55,3 +55,20 @@ func RegisterGroup(request GroupRequest) (models.Group, error) {
 
 	return group, nil
 }
+
+func UpdateGroupById(groupId string, request GroupRequest) (models.Group, error) {
+	group := models.Group{
+		GroupId: groupId,
+		UserId: request.UserId,
+		GroupName: request.GroupName,
+		GroupDescription: request.GroupDescription,
+		GroupIcon: request.GroupIcon,
+	}
+
+	err := models.UpdateGroupById(groupId, group)
+	if err != nil {
+		return models.Group{}, fmt.Errorf("予期せぬエラーが発生しました: %v", err)
+	}
+
+	return group, nil
+}

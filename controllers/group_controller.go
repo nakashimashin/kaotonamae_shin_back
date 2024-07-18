@@ -79,3 +79,29 @@ func RegisterGroup(c *gin.Context) {
 		"group": res,
 	})
 }
+
+func UpdateGroupById(c *gin.Context) {
+	groupId := c.Param("group_id")
+
+	var group services.GroupRequest
+
+	if err := c.ShouldBindJSON(&group); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	res, err := services.UpdateGroupById(groupId, group)
+	if err != nil {
+		logError(err)
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"group": res,
+	})
+}

@@ -41,3 +41,13 @@ func RegisterGroup(group Group) (err error) {
 
 	return
 }
+
+func UpdateGroupById(groupId string, group Group) (err error) {
+	err = DB.Debug().Where("group_id = ?", groupId).Updates(&group).Error
+
+	if err != nil {
+		return err
+	}
+
+	return
+}
