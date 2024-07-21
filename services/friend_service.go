@@ -19,7 +19,7 @@ func GetFriends() ([]models.Friend, error) {
 	return datas, nil
 }
 
-func GetFriendsByUserId(userId string) ([]models.Friend, error) {
+func GetFriendsByUserId(userId string) ([]string, error) {
 	datas, err := models.GetFriendsByUserId(userId)
 	if err != nil {
 		return nil, fmt.Errorf("予期せぬエラーが発生しました: %v", err)
@@ -34,3 +34,4 @@ func GetFriendsByUserId(userId string) ([]models.Friend, error) {
 	}
 	return friendIds, nil
 }
+
