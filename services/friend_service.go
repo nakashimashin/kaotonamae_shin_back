@@ -4,12 +4,11 @@ import (
 	"fmt"
 	"kaotonamae_back/models"
 
-	// "github.com/google/uuid"
 )
 
 type FriendRequest struct {
-	FriendId string `json:"friend_id"`
-	UserId string `json:"user_id"`
+	UserId1 string `json:"user_id1"`
+	UserId2 string `json:"user_id2"`
 }
 
 func GetFriends() ([]models.Friend, error) {
@@ -20,18 +19,18 @@ func GetFriends() ([]models.Friend, error) {
 	return datas, nil
 }
 
-func GetFriendById(friendId string) (models.Friend, error) {
-	data, err := models.GetFriendById(friendId)
-	if err != nil {
-		return models.Friend{}, fmt.Errorf("予期せぬエラーが発生しました: %v", err)
-	}
-	return data, nil
-}
-
-func GetFriendByUserId(userId string) ([]models.Friend, error) {
-	datas, err := models.GetFriendByUserId(userId)
+func GetFriendsByUserId(userId string) ([]models.Friend, error) {
+	datas, err := models.GetFriendsByUserId(userId)
 	if err != nil {
 		return nil, fmt.Errorf("予期せぬエラーが発生しました: %v", err)
 	}
-	return datas, nil
+	var friendIds []string
+	for _, data := range datas {
+		if data.UserId1 == userId {
+			friendIds = append(friendIds, data.UserId2)
+		} else {
+			friendIds = append(friendIds, data.UserId1)
+		}
+	}
+	return friendIds, nil
 }

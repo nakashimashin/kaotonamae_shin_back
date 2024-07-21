@@ -5,8 +5,8 @@ import (
 )
 
 type Friend struct {
-	FriendId string `json:"friend_id" gorm:"primaryKey"`
-	UserId string `json:"user_id" gorm:"not null"`
+	UserId1 string `json:"user_id1" gorm:"primaryKey"`
+	UserId2 string `json:"user_id2" gorm:"primaryKey"`
 	UpdatedAt time.Time `json:"updated_at"`
 	CreatedAt time.Time `json:"created_at"`
 }
@@ -17,14 +17,8 @@ func GetAllFriends() (friends []Friend, err error) {
 	return
 }
 
-func GetFriendById(friendId string) (friend Friend, err error) {
-	err = DB.Debug().Where("friend_id = ?", friendId).First(&friend).Error
-
-	return
-}
-
-func GetFriendByUserId(userId string) (friends []Friend, err error) {
-	err = DB.Debug().Where("user_id = ?", userId).Find(&friends).Error
+func GetFriendsByUserId(userId string) (friends []Friend, err error) {
+	err = DB.Debug().Where("user_id1 = ? OR user_id2 = ?", userId, userId).Find(&friends).Error
 
 	return
 }
