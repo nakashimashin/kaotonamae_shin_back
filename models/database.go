@@ -30,7 +30,7 @@ func Connect() *gorm.DB {
 }
 
 func Migrate() {
-	err := DB.AutoMigrate(&Auth{}, &UserInfo{}, &Group{})
+	err := DB.AutoMigrate(&Auth{}, &UserInfo{}, &Group{}, &Friend{})
 	if err != nil {
 		log.Fatalf("failed to migrate: %v", err)
 	}
