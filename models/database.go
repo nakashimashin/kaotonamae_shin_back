@@ -33,5 +33,7 @@ func Migrate() {
 	err := DB.AutoMigrate(&Auth{}, &UserInfo{}, &Group{}, &Friend{})
 	if err != nil {
 		log.Fatalf("failed to migrate: %v", err)
+	} else {
+		log.Println("migrate success")
 	}
 }
