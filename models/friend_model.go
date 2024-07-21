@@ -22,3 +22,13 @@ func GetFriendsByUserId(userId string) (friends []Friend, err error) {
 
 	return
 }
+
+func RegisterFriend(friend Friend) (err error) {
+	err = DB.Debug().Create(&friend).Error
+
+	if err != nil {
+		return err
+	}
+
+	return
+}

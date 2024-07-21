@@ -45,6 +45,7 @@ func GetApiRouter() *gin.Engine {
 		{
 			friend.GET("/", controllers.GetFriends)
 			friend.GET("/user/:user_id", controllers.GetFriendsByUserId)
+			friend.POST("/", controllers.RegisterFriend)
 		}
 	}
 
