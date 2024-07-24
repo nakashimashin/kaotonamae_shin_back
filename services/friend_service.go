@@ -35,7 +35,7 @@ func GetFriendsByUserId(userId string) ([]string, error) {
 	return friendIds, nil
 }
 
-func RegisterFriend(request FriendRequest) error {
+func RegisterFriend(request FriendRequest) (models.Friend, error) {
 	friend := models.Friend{
 		UserId1: request.UserId1,
 		UserId2: request.UserId2,
@@ -43,8 +43,8 @@ func RegisterFriend(request FriendRequest) error {
 
 	err := models.RegisterFriend(friend)
 	if err != nil {
-		return fmt.Errorf("予期せぬエラーが発生しました: %v", err)
+		return models.Friend{},fmt.Errorf("予期せぬエラーが発生しました: %v", err)
 	}
 
-	return nil
+	return friend, nil
 }
