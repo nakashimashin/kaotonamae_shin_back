@@ -67,3 +67,31 @@ func RegisterUserInfo(request UserInfoRequest) (models.UserInfo, error) {
 	}
 	return userInfo, nil
 }
+
+func UpdateUserInfoById(userId string, request UserInfoRequest) (models.UserInfo, error) {
+	userInfo := models.UserInfo{
+		UserId: userId,
+		UserLastName: request.UserLastName,
+		UserFirstName: request.UserFirstName,
+		UserLastNameKana: request.UserLastNameKana,
+		UserFirstNameKana: request.UserFirstNameKana,
+		Gender: request.Gender,
+		Icon: request.Icon,
+		BirthDate: request.BirthDate,
+		Hobby: request.Hobby,
+		Organization: request.Organization,
+		HolidayActivity: request.HolidayActivity,
+		Weakness: request.Weakness,
+		FavoriteColor: request.FavoriteColor,
+		FavoriteAnimal: request.FavoriteAnimal,
+		FavoritePlace: request.FavoritePlace,
+		Language: request.Language,
+		Nickname: request.Nickname,
+	}
+	err := models.UpdateUserInfoById(userId, userInfo)
+	if err != nil {
+		return models.UserInfo{}, fmt.Errorf("予期せぬエラーが発生しました: %v", err)
+	}
+
+	return userInfo, nil
+}

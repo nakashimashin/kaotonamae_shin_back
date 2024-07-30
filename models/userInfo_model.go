@@ -47,3 +47,13 @@ func RegisterUserInfo(userInfo UserInfo) (err error) {
 
 	return
 }
+
+func UpdateUserInfoById(userId string, userInfo UserInfo) (err error) {
+	err = DB.Debug().Where("user_id = ?", userId).Updates(&userInfo).Error
+
+	if err != nil {
+		return err
+	}
+
+	return
+}

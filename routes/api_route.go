@@ -30,6 +30,7 @@ func GetApiRouter() *gin.Engine {
 			userInfo.GET("/", controllers.GetUserInfos)
 			userInfo.GET("/:user_id", controllers.GetUserInfoById)
 			userInfo.POST("/", controllers.RegisterUserInfo)
+			userInfo.PUT("/:user_id", controllers.UpdateUserInfoById)
 		}
 
 		group := v1.Group("/group")
