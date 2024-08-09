@@ -48,6 +48,11 @@ func GetApiRouter() *gin.Engine {
 			friend.GET("/user/:user_id", controllers.GetFriendsByUserId)
 			friend.POST("/", controllers.RegisterFriend)
 		}
+
+		groupMember := v1.Group("/groupMember")
+		{
+			groupMember.POST("/", controllers.RegisterGroupMember)
+		}
 	}
 
 	return r
