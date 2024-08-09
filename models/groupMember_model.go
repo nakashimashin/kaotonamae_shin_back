@@ -11,6 +11,12 @@ type GroupMember struct {
 	CreatedAt time.Time `json:"created_at"`
 }
 
+func GetGroupMembersByGroupId(groupId string) (groupMembers []GroupMember, err error) {
+	err = DB.Debug().Where("group_id = ?", groupId).Find(&groupMembers).Error
+
+	return
+}
+
 func RegisterGroupMember(groupMember GroupMember) (err error) {
 	err = DB.Debug().Create(&groupMember).Error
 
