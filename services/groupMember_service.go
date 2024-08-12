@@ -35,3 +35,12 @@ func RegisterGroupMember(request GroupMemberRequest) (models.GroupMember, error)
 
 	return groupMember, nil
 }
+
+func DeleteGroupMember(groupId string, userId string) (models.GroupMember, error) {
+	groupMember, err := models.DeleteGroupMember(groupId, userId)
+	if err != nil {
+		return models.GroupMember{},fmt.Errorf("予期せぬエラーが発生しました: %v", err)
+	}
+
+	return groupMember, nil
+}
