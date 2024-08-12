@@ -27,6 +27,16 @@ func RegisterGroupMember(groupMember GroupMember) (err error) {
 	return
 }
 
+func RegisterGroupMembers(groupMembers []GroupMember) (err error) {
+	err = DB.Debug().Create(&groupMembers).Error
+
+	if err != nil {
+		return err
+	}
+
+	return
+}
+
 func DeleteGroupMember(groupId string, userId string) (groupMember GroupMember, err error) {
 	err = DB.Debug().Where("group_id = ? AND user_id = ?", groupId, userId).Delete(&groupMember).Error
 
