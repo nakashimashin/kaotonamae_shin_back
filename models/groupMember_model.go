@@ -42,3 +42,9 @@ func DeleteGroupMember(groupId string, userId string) (groupMember GroupMember, 
 
 	return
 }
+
+func DeleteGroupMembers(groupMembers []GroupMember) (err error) {
+	err = DB.Debug().Delete(&groupMembers).Error
+
+	return
+}

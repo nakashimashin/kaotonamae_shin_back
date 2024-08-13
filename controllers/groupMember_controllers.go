@@ -87,3 +87,26 @@ func DeleteGroupMember(c *gin.Context) {
 		"groupMember": res,
 	})
 }
+
+func DeleteGroupMembers(c *gin.Context) {
+	var groupMembers []services.GroupMemberRequest
+	if err := c.ShouldBindJSON(&groupMembers); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	res, err := services.DeleteGroupMembers(groupMembers)
+	if err != nil {
+		logError(err)
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"groupMembers": res,
+	})
+}

@@ -62,3 +62,22 @@ func DeleteGroupMember(groupId string, userId string) (models.GroupMember, error
 
 	return groupMember, nil
 }
+
+
+func DeleteGroupMembers(requests []GroupMemberRequest) ([]models.GroupMember, error) {
+	var groupMembers []models.GroupMember
+	for _, request := range requests {
+		groupMember := models.GroupMember{
+			GroupId: request.GroupId,
+			UserId: request.UserId,
+		}
+		groupMembers = append(groupMembers, groupMember)
+	}
+
+	err := models.DeleteGroupMembers(groupMembers)
+	if err != nil {
+		return nil, fmt.Errorf("予期せぬエラーが発生しました: %v", err)
+	}
+
+	return groupMembers, nil
+}

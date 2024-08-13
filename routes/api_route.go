@@ -55,6 +55,7 @@ func GetApiRouter() *gin.Engine {
 			groupMember.POST("/", controllers.RegisterGroupMember)
 			groupMember.POST("/multi", controllers.RegisterGroupMembers)
 			groupMember.DELETE("/:group_id/:user_id", controllers.DeleteGroupMember)
+			groupMember.DELETE("/multi", controllers.DeleteGroupMembers)
 		}
 	}
 
