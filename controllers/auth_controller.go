@@ -3,7 +3,6 @@ package controllers
 import (
 	"kaotonamae_back/services"
 	"net/http"
-	"log"
 
 	"github.com/gin-gonic/gin"
 )
@@ -46,7 +45,4 @@ func RegisterAuth(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"auth": res})
 }
 
-func logError(err error) {
-	log.Printf("error occurred: %v",err)
-}
 
